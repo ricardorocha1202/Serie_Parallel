@@ -1,20 +1,20 @@
 module SerieAParalelo (
-    input clk,     // Reloj de entrada
-    input reset,   // Señal de reinicio
-    input serial_in, // Entrada de datos en serie
-    output reg [3:0] parallel_out // Salida de datos en paralelo
+    input clk,     // Clock input
+    input reset,   // Reset = 1;
+    input serial_in, // Serial Data Input
+    output reg [3:0] parallel_out // Parallel Data Output
 );
 
-reg [3:0] shift_reg; // Registro de desplazamiento de 4 bits
+reg [3:0] shift_reg; // Shift register on 4 Bits
 
 always @(posedge clk or posedge reset) begin
     if (reset) begin
-        shift_reg <= 4'b0000; // Reinicia el registro de desplazamiento
+        shift_reg <= 4'b0000; // Reset Shift register to 0
     end else begin
-        shift_reg <= {shift_reg[2:0], serial_in}; // Desplaza y carga el nuevo bit serial
+        shift_reg <= {shift_reg[2:0], serial_in}; // Shift and load the new serial bit
     end
 end
 
-assign parallel_out = shift_reg; // La salida en paralelo es igual al contenido del registro de desplazamiento
+assign parallel_out = shift_reg; // Parallel output is equal to the contents of the shift register
 
 endmodule
