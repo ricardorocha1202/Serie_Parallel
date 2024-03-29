@@ -21,7 +21,7 @@ module tt_um_S2P (
  // assign uio_out = 0;
  // assign uio_oe  = 0;
 
-    Serie_Paralelo A1 (.clk(uio_in[7]) .rst(uio_in[6]) .serial_in(uio_in[5]) .parallel_out(uio_out[3:0]));
+    Serie_Paralelo A1 (.clk(uio_in[7]) , .rst(uio_in[6]), .serial_in(uio_in[5]), .parallel_out(uio_out[3:0]));
 
     assign uio_oe = 8'b00001111;
     assign uio_out[7:4] = 4'b0000;
