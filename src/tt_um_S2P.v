@@ -5,7 +5,7 @@
 
 `define default_netname none
 
-module tt_um_S2P  (
+module tt_um_S2P (
     input  wire [7:0] ui_in,    // Dedicated inputs
     output wire [7:0] uo_out,   // Dedicated outputs
     input  wire [7:0] uio_in,   // IOs: Input path
@@ -21,11 +21,11 @@ module tt_um_S2P  (
  // assign uio_out = 0;
  // assign uio_oe  = 0;
 
-    SerieAParalelo A1 (.clk(uio_in[7]) .rst (uio_in[6]) .serial_in (uio_in[5]) .parallel_out(uio_out[3:0]) );
+    Serie_Paralelo A1 (.clk(uio_in[7]) .rst(uio_in[6]) .serial_in(uio_in[5]) .parallel_out(uio_out[3:0]));
 
     assign uio_oe = 8'b00001111;
-    assign uio_out [7:4] = 4'b0000;
-    assign uo_out = 8'b00000000;
+    assign uio_out[7:4] = 4'b0000;
+    assign uo_out[7:0] = 8'b00000000;
     
 
     
