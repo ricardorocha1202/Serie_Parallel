@@ -15,7 +15,8 @@ project:
   
   # List your project's source files here. Source files must be in ./src and you must list each source file separately, one per line:
   source_files:        
-    - "project.v"
+    - "tt_um_S2P.v"
+    - "Serie_Paralelo.v"
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 pinout:
@@ -40,14 +41,14 @@ pinout:
   uo[7]: ""
 
   # Bidirectional pins
-  uio[0]: ""
-  uio[1]: ""
-  uio[2]: ""
-  uio[3]: ""
-  uio[4]: ""
-  uio[5]: ""
-  uio[6]: ""
-  uio[7]: ""
+  uio[0]: "Bit 0"
+  uio[1]: "Bit 1"
+  uio[2]: "Bit 2"
+  uio[3]: "Bit 3"
+  uio[4]: " no uese"
+  uio[5]: "Serie_in"
+  uio[6]: "rst"
+  uio[7]: "clk"
 
 # Do not change!
 yaml_version: 6
