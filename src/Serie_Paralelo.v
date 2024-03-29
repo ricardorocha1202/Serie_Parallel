@@ -1,4 +1,4 @@
-module SerieAParalelo (
+module Serie_Paralelo (
     input clk,     // Clock input
     input reset,   // Reset = 1;
     input serial_in, // Serial Data Input
