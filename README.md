@@ -1,41 +1,33 @@
-![](../../workflows/gds/badge.svg) ![](../../workflows/docs/badge.svg) ![](../../workflows/test/badge.svg)
+## How it works
 
-# Tiny Tapeout Verilog Project Template
+A erial-parallel register, is a digital circuit used to store data sequentially and then transfer it in parallel. It works in the following way:
 
-- [Read the documentation for project](docs/info.md)
+Serial Input: Data is input sequentially, bit by bit, through a single input line. These bits move through the register, being temporarily stored in the register's memory cells.
 
-## What is Tiny Tapeout?
+Temporary Storage: As bits are entered, each bit is loaded into a memory cell within the register. This is typically done using a serial shifting mechanism, where each new bit pushes the next bit to the next memory cell, thus shifting all previous bits forward.
 
-TinyTapeout is an educational project that aims to make it easier and cheaper than ever to get your digital designs manufactured on a real chip.
+Parallel Transfer: When all the bits have been entered into the register serially and temporarily stored, they can be transferred simultaneously or in parallel from the memory cells of the register to a parallel width data bus. This is achieved by loading each bit stored in the memory cells into parallel output lines that are connected to the data bus.Typically, type D latches or flip flops are used, which are controlled by the clock, which determines when a data chain begins or ends.
 
-To learn more and get started, visit https://tinytapeout.com.
+Control and Synchronization: The operation of the serial-parallel register is controlled by control signals that indicate when to start inputting data, when to stop serial input, when to start parallel transfer, and when to stop transfer. Accurate synchronization is crucial to ensure that data moves correctly through the register and is transferred to the data bus at the right time.
 
-## Verilog Projects
+For this project, a 4-bit serial-parallel register was made, which consists of a clock, a reset, the serial input and the parallel output.
 
-1. Add your Verilog files to the `src` folder.
-2. Edit the [info.yaml](info.yaml) and update information about your project, paying special attention to the `source_files` and `top_module` properties. If you are upgrading an existing Tiny Tapeout project, check out our [online info.yaml migration tool](https://tinytapeout.github.io/tt-yaml-upgrade-tool/).
-3. Edit [docs/info.md](docs/info.md) and add a description of your project.
-4. Optionally, add a testbench to the `test` folder. See [test/README.md](test/README.md) for more information.
+The importance of this register is found in a binary search block used in converters such as ADC SAR by its acronym Digital Analog Converter successive approximation register which introduces a series of data into the system in serial form and requires a series in parallel to determine the value to convert.
 
-The GitHub action will automatically build the ASIC files using [OpenLane](https://www.zerotoasiccourse.com/terminology/openlane/).
+## How to test
 
-## Enable GitHub actions to build the results page
+The testbench used was proposed, carried out in ACTIVE HDL-Student Version, the stimuli used were.
 
-- [Enabling GitHub Pages](https://tinytapeout.com/faq/#my-github-action-is-failing-on-the-pages-part)
+10ns period clock.
+Reset, through a formula which at 0 fs is 1 and 0 after 1 ns to clean the data and start with a known value with is 0.
+Serial input, a 20 ns clock.
 
-## Resources
+The parallel output is updated every 4 clock cycles and displays the result until it updates the next 4 clock cycles with a new result.
 
-- [FAQ](https://tinytapeout.com/faq/)
-- [Digital design lessons](https://tinytapeout.com/digital_design/)
-- [Learn how semiconductors work](https://tinytapeout.com/siliwiz/)
-- [Join the community](https://tinytapeout.com/discord)
-- [Build your design locally](https://docs.google.com/document/d/1aUUZ1jthRpg4QURIIyzlOaPWlmQzr-jBn3wZipVUPt4)
+## External hardware
 
-## What next?
+Wave generator:This controls the system clock externally
 
-- [Submit your design to the next shuttle](https://app.tinytapeout.com/).
-- Edit [this README](README.md) and explain your design, how it works, and how to test it.
-- Share your project on your social network of choice:
-  - LinkedIn [#tinytapeout](https://www.linkedin.com/search/results/content/?keywords=%23tinytapeout) [@TinyTapeout](https://www.linkedin.com/company/100708654/)
-  - Mastodon [#tinytapeout](https://chaos.social/tags/tinytapeout) [@matthewvenn](https://chaos.social/@matthewvenn)
-  - X (formerly Twitter) [#tinytapeout](https://twitter.com/hashtag/tinytapeout) [@matthewvenn](https://twitter.com/matthewvenn)
+Switch, connected in the reset and is used when we perform a conversion, It can also be used with a button or with a wave generator using a square pulse once. The reset switch value must be 0 to allow a value that is different from 0 on the parallel output.
+
+Logic Analyzer. This allows a serial signal to be introduced into the system that varies its values non-periodically to read its conversion in parallel, the same logic analyzer can read the output in parallel. Keysight 1681AD Logic Analyzer in INAOE con be used. Another way is to use an FPGA programmed with serial values and it can obtain the output values in parallel.
