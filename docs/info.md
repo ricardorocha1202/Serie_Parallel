@@ -9,7 +9,7 @@ You can also include images in this folder and reference them in the markdown. E
 
 ## How it works
 
-A erial-parallel register, is a digital circuit used to store data sequentially and then transfer it in parallel. It works in the following way:
+A Serial-parallel register, is a digital circuit used to store data sequentially and then transfer it in parallel. It works in the following way:
 
 Serial Input: Data is input sequentially, bit by bit, through a single input line. These bits move through the register, being temporarily stored in the register's memory cells.
 
